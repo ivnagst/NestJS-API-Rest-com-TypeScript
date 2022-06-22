@@ -1,5 +1,4 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { get } from "http";
 import { Produto } from "./produto.model";
 @Controller('produtos')
 export class ProdutosController{
@@ -8,19 +7,19 @@ export class ProdutosController{
         new Produto ("LIV02", "Mitologia", 93.34),
         new Produto ("LIV03", "I.A como serviço", 63.65),
     ];
-    }
+    
     @Get()
-    obterTodos():string {  // MÉTODO
-        return 'Lista todos os produtos';
+    obterTodos(): Produto[] {
+        return this.produtos;
     }
     @Get(':id')
-    obterUm(@Param() params): string {
-        return `Retorna os dados do produto ${params.id}`
+    obterUm(@Param() params): Produto {
+        return this.produtos[0]; 
     }
     @Post()
-    criar(@Body() produto): string {
-        console.log(produto)
-        return 'Produto Criado'
+    criar(@Body() produto: Produto) {
+        produto.id = 89
+        this.produtos.push(produto)
     }
     @Put()
     alterar(@Body() produto): string {
