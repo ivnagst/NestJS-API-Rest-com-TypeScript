@@ -27,7 +27,7 @@ export class ProdutosController{
         return 'Produto alterado'
     }    
     @Delete(':id')
-    apagar(@Param() params): string {
-        return `Apaga o produto ${params.id}`
+    apagar(@Param() params) {
+       this.produtos.pop()
     }
 }
